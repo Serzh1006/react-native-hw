@@ -1,11 +1,33 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, ImageBackground } from "react-native";
+import { useState } from "react";
+import RegisterScreen from "./Screens/RegistrationScreen";
+import LoginScreen from "./Screens/LoginScreen";
+import { useFonts } from "expo-font";
+import img from "./img/back.jpg";
 
 export default function App() {
+  const [isUser, setUser] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    "roboto-regular": require("./assets/fonts/roboto-regular.otf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  const toggleUser = (value) => {
+    setUser(value);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <ImageBackground style={styles.imageBack} source={img} />
+      {!isUser ? (
+        <RegisterScreen toggleUser={toggleUser} />
+      ) : (
+        <LoginScreen toggleUser={toggleUser} />
+      )}
     </View>
   );
 }
@@ -13,8 +35,16 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: "relative",
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+  },
+  imageBack: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
   },
 });
