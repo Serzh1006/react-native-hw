@@ -28,7 +28,7 @@ const RegisterScreen = ({ toggleUser }) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       width={"100%"}
-      keyboardVerticalOffset={-180}
+      keyboardVerticalOffset={-190}
     >
       <View style={styles.form}>
         <View style={styles.icon}>
@@ -48,6 +48,7 @@ const RegisterScreen = ({ toggleUser }) => {
             placeholder="Логін"
             onChangeText={changeLogin}
             value={login}
+            keyboardType="visible-password"
           />
           <TextInput
             style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
@@ -71,6 +72,7 @@ const RegisterScreen = ({ toggleUser }) => {
               onChangeText={changePassword}
               value={password}
               secureTextEntry={isShowPassword}
+              keyboardType="visible-password"
             ></TextInput>
             <Text
               style={styles.showPasswordBtn}
@@ -90,7 +92,7 @@ const RegisterScreen = ({ toggleUser }) => {
             color="#1B4371"
             title="Вже є акаунт? Увійти"
             onPress={registerForm}
-            style={styles.showBtn}
+            style={styles.changeScreen}
           />
         </View>
       </View>
@@ -102,10 +104,13 @@ const styles = StyleSheet.create({
   form: {
     position: "relative",
     width: "100%",
-    height: 549,
+    maxHeight: "auto",
     backgroundColor: "#fff",
-    borderTopLeftRadius: "25",
-    borderTopRightRadius: "25",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    paddingBottom: 78,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   addAvatar: {
     position: "absolute",
@@ -121,8 +126,7 @@ const styles = StyleSheet.create({
   icon: {
     position: "absolute",
     top: -60,
-    left: "50%",
-    transform: [{ translateX: -58 }],
+    alignSelf: "center",
     width: 132,
     height: 120,
     backgroundColor: "#F6F6F6",
@@ -135,7 +139,7 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     fontFamily: "roboto-regular",
     backgroundColor: "#E6E6E6",
-    width: 343,
+    minWidth: "100%",
     height: 50,
     paddingLeft: 16,
     borderRadius: 5,
@@ -150,7 +154,7 @@ const styles = StyleSheet.create({
   showPasswordBtn: {
     position: "absolute",
     fontFamily: "roboto-regular",
-    fontWeight: 400,
+    fontWeight: "400",
     top: 15,
     right: 16,
     fontSize: 16,
@@ -163,7 +167,7 @@ const styles = StyleSheet.create({
   register: {
     fontFamily: "roboto-regular",
     fontSize: 30,
-    fontWeight: 500,
+    fontWeight: "500",
     textAlign: "center",
     color: "#212121",
     marginBottom: 40,
@@ -185,9 +189,15 @@ const styles = StyleSheet.create({
   registerBtn: {
     fontFamily: "roboto-regular",
     fontSize: 16,
-    fontWeight: 400,
+    fontWeight: "400",
     color: "#fff",
     textAlign: "center",
+  },
+  changeScreen: {
+    fontFamily: "roboto-regular",
+    fontWeight: 400,
+    fontSize: 16,
+    color: "#1B4371",
   },
 });
 

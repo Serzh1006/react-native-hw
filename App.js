@@ -1,15 +1,15 @@
 import { StyleSheet, View, ImageBackground } from "react-native";
 import { useState } from "react";
-import RegisterScreen from "./Screens/RegistrationScreen";
-import LoginScreen from "./Screens/LoginScreen";
+import RegisterScreen from "./src/Screens/RegistrationScreen";
+import LoginScreen from "./src/Screens/LoginScreen";
 import { useFonts } from "expo-font";
-import img from "./img/back.jpg";
+import img from "./src/img/back.jpg";
 
 export default function App() {
   const [isUser, setUser] = useState(false);
 
   const [fontsLoaded] = useFonts({
-    "roboto-regular": require("./assets/fonts/roboto-regular.otf"),
+    "roboto-regular": require("./src/assets/fonts/roboto-regular.otf"),
   });
 
   if (!fontsLoaded) {

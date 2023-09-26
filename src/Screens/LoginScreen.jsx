@@ -25,7 +25,7 @@ const LoginScreen = ({ toggleUser }) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       width={"100%"}
-      keyboardVerticalOffset={-240}
+      keyboardVerticalOffset={-250}
     >
       <View style={styles.form}>
         <Text style={styles.login}>Увійти</Text>
@@ -50,6 +50,7 @@ const LoginScreen = ({ toggleUser }) => {
             onChangeText={changePassword}
             value={password}
             secureTextEntry={isShowPassword}
+            keyboardType="visible-password"
           ></TextInput>
           <Text
             style={styles.showPasswordBtn}
@@ -66,6 +67,7 @@ const LoginScreen = ({ toggleUser }) => {
           color="#1B4371"
           title="Немає акаунту? Зареєструватися"
           onPress={loginForm}
+          style={styles.changeScreen}
         />
       </View>
     </KeyboardAvoidingView>
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     fontFamily: "roboto-regular",
     backgroundColor: "#E6E6E6",
-    width: 343,
+    minWidth: "100%",
     height: 50,
     paddingLeft: 16,
     borderRadius: 5,
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
   login: {
     fontFamily: "roboto-regular",
     fontSize: 30,
-    fontWeight: 500,
+    fontWeight: "500",
     textAlign: "center",
     color: "#212121",
     marginBottom: 33,
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
   showPasswordBtn: {
     position: "absolute",
     fontFamily: "roboto-regular",
-    fontWeight: 400,
+    fontWeight: "400",
     top: 15,
     right: 16,
     fontSize: 16,
@@ -130,20 +132,29 @@ const styles = StyleSheet.create({
   registerBtn: {
     fontFamily: "roboto-regular",
     fontSize: 16,
-    fontWeight: 400,
+    fontWeight: "400",
     color: "#fff",
     textAlign: "center",
   },
   form: {
     width: "100%",
-    height: 489,
+    maxHeight: "auto",
+    paddingBottom: 144,
     backgroundColor: "#fff",
-    borderTopLeftRadius: "25",
-    borderTopRightRadius: "25",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   isFocus: {
     borderColor: "#FF6C00",
     backgroundColor: "#FFFFFF",
+  },
+  changeScreen: {
+    fontFamily: "roboto-regular",
+    fontWeight: 400,
+    fontSize: 16,
+    color: "#1B4371",
   },
 });
 
