@@ -28,7 +28,7 @@ const RegisterScreen = ({ toggleUser }) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       width={"100%"}
-      keyboardVerticalOffset={-190}
+      keyboardVerticalOffset={Platform.OS === "ios" ? -190 : -120}
     >
       <View style={styles.form}>
         <View style={styles.icon}>
@@ -48,7 +48,7 @@ const RegisterScreen = ({ toggleUser }) => {
             placeholder="Логін"
             onChangeText={changeLogin}
             value={login}
-            keyboardType="visible-password"
+            autoCapitalize={"none"}
           />
           <TextInput
             style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
@@ -72,7 +72,7 @@ const RegisterScreen = ({ toggleUser }) => {
               onChangeText={changePassword}
               value={password}
               secureTextEntry={isShowPassword}
-              keyboardType="visible-password"
+              autoCapitalize={"none"}
             ></TextInput>
             <Text
               style={styles.showPasswordBtn}
@@ -104,11 +104,11 @@ const styles = StyleSheet.create({
   form: {
     position: "relative",
     width: "100%",
-    maxHeight: "auto",
+    height: "auto",
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    paddingBottom: 78,
+    paddingBottom: Platform.OS === "ios" ? 78 : 35,
     paddingLeft: 16,
     paddingRight: 16,
   },

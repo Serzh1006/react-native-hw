@@ -25,7 +25,7 @@ const LoginScreen = ({ toggleUser }) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       width={"100%"}
-      keyboardVerticalOffset={-250}
+      keyboardVerticalOffset={Platform.OS === "ios" ? -250 : -80}
     >
       <View style={styles.form}>
         <Text style={styles.login}>Увійти</Text>
@@ -50,7 +50,7 @@ const LoginScreen = ({ toggleUser }) => {
             onChangeText={changePassword}
             value={password}
             secureTextEntry={isShowPassword}
-            keyboardType="visible-password"
+            autoCapitalize={"none"}
           ></TextInput>
           <Text
             style={styles.showPasswordBtn}
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   form: {
     width: "100%",
     maxHeight: "auto",
-    paddingBottom: 144,
+    paddingBottom: Platform.OS === "ios" ? 144 : 70,
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
