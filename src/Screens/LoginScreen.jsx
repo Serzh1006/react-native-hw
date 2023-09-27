@@ -57,7 +57,7 @@ const LoginScreen = ({ toggleUser }) => {
             color="#1B4371"
             onPress={() => setShowPassword(!isShowPassword)}
           >
-            Показати
+            {isShowPassword ? "Показати" : "Сховати"}
           </Text>
         </View>
         <TouchableOpacity style={styles.TouchableOpacity}>
