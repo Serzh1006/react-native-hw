@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   form: {
     position: "relative",
     width: "100%",
-    height: "auto",
+    minHeight: "auto",
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,

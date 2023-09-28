@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   },
   form: {
     width: "100%",
-    maxHeight: "auto",
+    minHeight: "auto",
     paddingBottom: Platform.OS === "ios" ? 144 : 70,
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
