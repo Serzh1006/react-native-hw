@@ -1,4 +1,5 @@
 import {
+  Alert,
   View,
   TextInput,
   StyleSheet,
@@ -7,6 +8,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
@@ -24,79 +27,88 @@ const RegisterScreen = ({ toggleUser }) => {
     toggleUser(true);
   };
 
-  return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      width={"100%"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? -190 : -120}
-    >
-      <View style={styles.form}>
-        <View style={styles.icon}>
-          <AntDesign
-            style={styles.addAvatar}
-            name="pluscircleo"
-            size={25}
-            color="#FF6C00"
-          />
-        </View>
-        <View>
-          <Text style={styles.register}>Реєстрація</Text>
-          <TextInput
-            style={[styles.input, onFocusLogin === "login" && styles.isFocus]}
-            onFocus={() => setLogin("login")}
-            onBlur={() => setLogin(null)}
-            placeholder="Логін"
-            onChangeText={changeLogin}
-            value={login}
-            autoCapitalize={"none"}
-          />
-          <TextInput
-            style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
-            onFocus={() => setEmail("email")}
-            onBlur={() => setEmail(null)}
-            placeholder="Адреса електронної пошти"
-            onChangeText={changeEmail}
-            value={email}
-          />
+  const onSubmit = () => {
+    Alert.alert(`${login}-${email}-${password}`);
+  };
 
-          <View style={styles.inputWrap}>
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        width={"100%"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? -190 : -120}
+      >
+        <View style={styles.form}>
+          <View style={styles.icon}>
+            <AntDesign
+              style={styles.addAvatar}
+              name="pluscircleo"
+              size={25}
+              color="#FF6C00"
+            />
+          </View>
+          <View>
+            <Text style={styles.register}>Реєстрація</Text>
             <TextInput
-              style={[
-                styles.input,
-                onFocusPassword === "password" && styles.isFocus,
-                styles.inputPassword,
-              ]}
-              onFocus={() => setPassword("password")}
-              onBlur={() => setPassword(null)}
-              placeholder="Пароль"
-              onChangeText={changePassword}
-              value={password}
-              secureTextEntry={isShowPassword}
+              style={[styles.input, onFocusLogin === "login" && styles.isFocus]}
+              onFocus={() => setLogin("login")}
+              onBlur={() => setLogin(null)}
+              placeholder="Логін"
+              onChangeText={changeLogin}
+              value={login}
               autoCapitalize={"none"}
-            ></TextInput>
-            <Text
-              style={styles.showPasswordBtn}
-              color="#1B4371"
-              onPress={() => setShowPassword(!isShowPassword)}
+            />
+            <TextInput
+              style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
+              onFocus={() => setEmail("email")}
+              onBlur={() => setEmail(null)}
+              placeholder="Адреса електронної пошти"
+              onChangeText={changeEmail}
+              value={email}
+            />
+
+            <View style={styles.inputWrap}>
+              <TextInput
+                style={[
+                  styles.input,
+                  onFocusPassword === "password" && styles.isFocus,
+                  styles.inputPassword,
+                ]}
+                onFocus={() => setPassword("password")}
+                onBlur={() => setPassword(null)}
+                placeholder="Пароль"
+                onChangeText={changePassword}
+                value={password}
+                secureTextEntry={isShowPassword}
+                autoCapitalize={"none"}
+              ></TextInput>
+              <Text
+                style={styles.showPasswordBtn}
+                color="#1B4371"
+                onPress={() => setShowPassword(!isShowPassword)}
+              >
+                {isShowPassword ? "Показати" : "Сховати"}
+              </Text>
+            </View>
+          </View>
+
+          <View>
+            <TouchableOpacity
+              onPress={onSubmit}
+              style={styles.TouchableOpacity}
             >
-              {isShowPassword ? "Показати" : "Сховати"}
-            </Text>
+              <Text style={styles.registerBtn}>Зареєструватися</Text>
+            </TouchableOpacity>
+            <Button
+              color="#1B4371"
+              title="Вже є акаунт? Увійти"
+              onPress={registerForm}
+              style={styles.changeScreen}
+            />
           </View>
         </View>
-
-        <View>
-          <TouchableOpacity style={styles.TouchableOpacity}>
-            <Text style={styles.registerBtn}>Зареєструватися</Text>
-          </TouchableOpacity>
-          <Button
-            color="#1B4371"
-            title="Вже є акаунт? Увійти"
-            onPress={registerForm}
-            style={styles.changeScreen}
-          />
-        </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
