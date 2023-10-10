@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-  TouchableWithoutFeedback,
-  Keyboard,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
@@ -32,83 +30,78 @@ const RegisterScreen = ({ toggleUser }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        width={"100%"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? -190 : -120}
-      >
-        <View style={styles.form}>
-          <View style={styles.icon}>
-            <AntDesign
-              style={styles.addAvatar}
-              name="pluscircleo"
-              size={25}
-              color="#FF6C00"
-            />
-          </View>
-          <View>
-            <Text style={styles.register}>Реєстрація</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      width={"100%"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? -190 : -120}
+    >
+      <View style={styles.form}>
+        <View style={styles.icon}>
+          <AntDesign
+            style={styles.addAvatar}
+            name="pluscircleo"
+            size={25}
+            color="#FF6C00"
+          />
+        </View>
+        <View>
+          <Text style={styles.register}>Реєстрація</Text>
+          <TextInput
+            style={[styles.input, onFocusLogin === "login" && styles.isFocus]}
+            onFocus={() => setLogin("login")}
+            onBlur={() => setLogin(null)}
+            placeholder="Логін"
+            onChangeText={changeLogin}
+            value={login}
+            autoCapitalize={"none"}
+          />
+          <TextInput
+            style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
+            onFocus={() => setEmail("email")}
+            onBlur={() => setEmail(null)}
+            placeholder="Адреса електронної пошти"
+            onChangeText={changeEmail}
+            value={email}
+          />
+
+          <View style={styles.inputWrap}>
             <TextInput
-              style={[styles.input, onFocusLogin === "login" && styles.isFocus]}
-              onFocus={() => setLogin("login")}
-              onBlur={() => setLogin(null)}
-              placeholder="Логін"
-              onChangeText={changeLogin}
-              value={login}
+              style={[
+                styles.input,
+                onFocusPassword === "password" && styles.isFocus,
+                styles.inputPassword,
+              ]}
+              onFocus={() => setPassword("password")}
+              onBlur={() => setPassword(null)}
+              placeholder="Пароль"
+              onChangeText={changePassword}
+              value={password}
+              secureTextEntry={isShowPassword}
               autoCapitalize={"none"}
-            />
-            <TextInput
-              style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
-              onFocus={() => setEmail("email")}
-              onBlur={() => setEmail(null)}
-              placeholder="Адреса електронної пошти"
-              onChangeText={changeEmail}
-              value={email}
-            />
-
-            <View style={styles.inputWrap}>
-              <TextInput
-                style={[
-                  styles.input,
-                  onFocusPassword === "password" && styles.isFocus,
-                  styles.inputPassword,
-                ]}
-                onFocus={() => setPassword("password")}
-                onBlur={() => setPassword(null)}
-                placeholder="Пароль"
-                onChangeText={changePassword}
-                value={password}
-                secureTextEntry={isShowPassword}
-                autoCapitalize={"none"}
-              ></TextInput>
-              <Text
-                style={styles.showPasswordBtn}
-                color="#1B4371"
-                onPress={() => setShowPassword(!isShowPassword)}
-              >
-                {isShowPassword ? "Показати" : "Сховати"}
-              </Text>
-            </View>
-          </View>
-
-          <View>
-            <TouchableOpacity
-              onPress={onSubmit}
-              style={styles.TouchableOpacity}
-            >
-              <Text style={styles.registerBtn}>Зареєструватися</Text>
-            </TouchableOpacity>
-            <Button
+            ></TextInput>
+            <Text
+              style={styles.showPasswordBtn}
               color="#1B4371"
-              title="Вже є акаунт? Увійти"
-              onPress={registerForm}
-              style={styles.changeScreen}
-            />
+              onPress={() => setShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? "Показати" : "Сховати"}
+            </Text>
           </View>
         </View>
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+
+        <View>
+          <TouchableOpacity onPress={onSubmit} style={styles.TouchableOpacity}>
+            <Text style={styles.registerBtn}>Зареєструватися</Text>
+          </TouchableOpacity>
+          <Button
+            color="#1B4371"
+            title="Вже є акаунт? Увійти"
+            onPress={registerForm}
+            style={styles.changeScreen}
+          />
+        </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -116,7 +109,6 @@ const styles = StyleSheet.create({
   form: {
     position: "relative",
     width: "100%",
-    minHeight: "auto",
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -186,19 +178,19 @@ const styles = StyleSheet.create({
     marginTop: 92,
   },
   TouchableOpacity: {
-    paddingTop: 16,
-    paddingBottom: 16,
-    paddingLeft: 32,
-    paddingRight: 32,
     color: "#fff",
     backgroundColor: "#FF6C00",
     borderRadius: 100,
-    width: 343,
+    width: "100%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: 16,
   },
   registerBtn: {
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 32,
+    paddingRight: 32,
     fontFamily: "roboto-regular",
     fontSize: 16,
     fontWeight: "400",

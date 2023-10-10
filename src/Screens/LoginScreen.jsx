@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-  TouchableWithoutFeedback,
-  Keyboard,
 } from "react-native";
 import { useState } from "react";
 
@@ -29,57 +27,55 @@ const LoginScreen = ({ toggleUser }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        width={"100%"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? -250 : -80}
-      >
-        <View style={styles.form}>
-          <Text style={styles.login}>Увійти</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      width={"100%"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? -250 : -80}
+    >
+      <View style={styles.form}>
+        <Text style={styles.login}>Увійти</Text>
+        <TextInput
+          style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
+          onFocus={() => setEmail("email")}
+          onBlur={() => setEmail(null)}
+          placeholder="Адреса електронної пошти"
+          onChangeText={changeEmail}
+          value={email}
+        />
+        <View style={styles.inputWrap}>
           <TextInput
-            style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
-            onFocus={() => setEmail("email")}
-            onBlur={() => setEmail(null)}
-            placeholder="Адреса електронної пошти"
-            onChangeText={changeEmail}
-            value={email}
-          />
-          <View style={styles.inputWrap}>
-            <TextInput
-              style={[
-                styles.input,
-                onFocusPassword === "password" && styles.isFocus,
-                styles.inputPassword,
-              ]}
-              onFocus={() => setPassword("password")}
-              onBlur={() => setPassword(null)}
-              placeholder="Пароль"
-              onChangeText={changePassword}
-              value={password}
-              secureTextEntry={isShowPassword}
-              autoCapitalize={"none"}
-            ></TextInput>
-            <Text
-              style={styles.showPasswordBtn}
-              color="#1B4371"
-              onPress={() => setShowPassword(!isShowPassword)}
-            >
-              {isShowPassword ? "Показати" : "Сховати"}
-            </Text>
-          </View>
-          <TouchableOpacity onPress={onSubmit} style={styles.TouchableOpacity}>
-            <Text style={styles.registerBtn}>Увійти</Text>
-          </TouchableOpacity>
-          <Button
+            style={[
+              styles.input,
+              onFocusPassword === "password" && styles.isFocus,
+              styles.inputPassword,
+            ]}
+            onFocus={() => setPassword("password")}
+            onBlur={() => setPassword(null)}
+            placeholder="Пароль"
+            onChangeText={changePassword}
+            value={password}
+            secureTextEntry={isShowPassword}
+            autoCapitalize={"none"}
+          ></TextInput>
+          <Text
+            style={styles.showPasswordBtn}
             color="#1B4371"
-            title="Немає акаунту? Зареєструватися"
-            onPress={loginForm}
-            style={styles.changeScreen}
-          />
+            onPress={() => setShowPassword(!isShowPassword)}
+          >
+            {isShowPassword ? "Показати" : "Сховати"}
+          </Text>
         </View>
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+        <TouchableOpacity onPress={onSubmit} style={styles.TouchableOpacity}>
+          <Text style={styles.registerBtn}>Увійти</Text>
+        </TouchableOpacity>
+        <Button
+          color="#1B4371"
+          title="Немає акаунту? Зареєструватися"
+          onPress={loginForm}
+          style={styles.changeScreen}
+        />
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -126,19 +122,19 @@ const styles = StyleSheet.create({
     color: "#1B4371",
   },
   TouchableOpacity: {
-    paddingTop: 16,
-    paddingBottom: 16,
-    paddingLeft: 32,
-    paddingRight: 32,
     color: "#fff",
     backgroundColor: "#FF6C00",
     borderRadius: 100,
-    width: 343,
+    width: "100%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: 16,
   },
   registerBtn: {
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 32,
+    paddingRight: 32,
     fontFamily: "roboto-regular",
     fontSize: 16,
     fontWeight: "400",
@@ -147,7 +143,6 @@ const styles = StyleSheet.create({
   },
   form: {
     width: "100%",
-    minHeight: "auto",
     paddingBottom: Platform.OS === "ios" ? 144 : 70,
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
