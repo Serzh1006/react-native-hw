@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
+import { StyleSheet, View, ImageBackground } from "react-native";
 import { useState } from "react";
 import RegisterScreen from "./src/Screens/RegistrationScreen";
 import LoginScreen from "./src/Screens/LoginScreen";
@@ -27,17 +21,19 @@ export default function App() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <ImageBackground style={styles.imageBack} source={img}>
-          {!isUser ? (
-            <RegisterScreen toggleUser={toggleUser} />
-          ) : (
-            <LoginScreen toggleUser={toggleUser} />
-          )}
-        </ImageBackground>
-      </View>
-    </TouchableWithoutFeedback>
+    <View style={styles.container}>
+      <ImageBackground
+        resizeMethod="resize"
+        style={styles.imageBack}
+        source={img}
+      >
+        {!isUser ? (
+          <RegisterScreen toggleUser={toggleUser} />
+        ) : (
+          <LoginScreen toggleUser={toggleUser} />
+        )}
+      </ImageBackground>
+    </View>
   );
 }
 
@@ -46,12 +42,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "flex-end",
   },
   imageBack: {
     flex: 1,
-    justifyContent: "flex-end",
-    resizeMode: "cover",
     width: "100%",
     height: "100%",
   },

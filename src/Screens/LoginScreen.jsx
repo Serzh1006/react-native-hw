@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
 
@@ -27,62 +29,70 @@ const LoginScreen = ({ toggleUser }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      width={"100%"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? -250 : -80}
-    >
-      <View style={styles.form}>
-        <Text style={styles.login}>Увійти</Text>
-        <TextInput
-          style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
-          onFocus={() => setEmail("email")}
-          onBlur={() => setEmail(null)}
-          placeholder="Адреса електронної пошти"
-          onChangeText={changeEmail}
-          value={email}
-        />
-        <View style={styles.inputWrap}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        enabled
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        width={"100%"}
+        style={styles.containerKeyBoard}
+        keyboardVerticalOffset={Platform.OS === "ios" ? -250 : -200}
+      >
+        <View style={styles.form}>
+          <Text style={styles.login}>Увійти</Text>
+
           <TextInput
-            style={[
-              styles.input,
-              onFocusPassword === "password" && styles.isFocus,
-              styles.inputPassword,
-            ]}
-            onFocus={() => setPassword("password")}
-            onBlur={() => setPassword(null)}
-            placeholder="Пароль"
-            onChangeText={changePassword}
-            value={password}
-            secureTextEntry={isShowPassword}
-            autoCapitalize={"none"}
-          ></TextInput>
-          <Text
-            style={styles.showPasswordBtn}
+            style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
+            onFocus={() => setEmail("email")}
+            onBlur={() => setEmail(null)}
+            placeholder="Адреса електронної пошти"
+            onChangeText={changeEmail}
+            value={email}
+          />
+
+          <View style={styles.inputWrap}>
+            <TextInput
+              style={[
+                styles.input,
+                onFocusPassword === "password" && styles.isFocus,
+                styles.inputPassword,
+              ]}
+              onFocus={() => setPassword("password")}
+              onBlur={() => setPassword(null)}
+              placeholder="Пароль"
+              onChangeText={changePassword}
+              value={password}
+              secureTextEntry={isShowPassword}
+              autoCapitalize={"none"}
+            ></TextInput>
+            <Text
+              style={styles.showPasswordBtn}
+              color="#1B4371"
+              onPress={() => setShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? "Показати" : "Сховати"}
+            </Text>
+          </View>
+          <TouchableOpacity onPress={onSubmit} style={styles.TouchableOpacity}>
+            <Text style={styles.registerBtn}>Увійти</Text>
+          </TouchableOpacity>
+          <Button
             color="#1B4371"
-            onPress={() => setShowPassword(!isShowPassword)}
-          >
-            {isShowPassword ? "Показати" : "Сховати"}
-          </Text>
+            title="Немає акаунту? Зареєструватися"
+            onPress={loginForm}
+            style={styles.changeScreen}
+          />
         </View>
-        <TouchableOpacity onPress={onSubmit} style={styles.TouchableOpacity}>
-          <Text style={styles.registerBtn}>Увійти</Text>
-        </TouchableOpacity>
-        <Button
-          color="#1B4371"
-          title="Немає акаунту? Зареєструватися"
-          onPress={loginForm}
-          style={styles.changeScreen}
-        />
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+  containerKeyBoard: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
   input: {
-    marginLeft: "auto",
-    marginRight: "auto",
     fontFamily: "roboto-regular",
     backgroundColor: "#E6E6E6",
     minWidth: "100%",
