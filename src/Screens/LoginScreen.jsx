@@ -14,9 +14,9 @@ import {
 import { useState } from "react";
 
 const LoginScreen = ({ toggleUser }) => {
-  const [email, changeEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, changePassword] = useState("");
-  const [onFocusEmail, setEmail] = useState("null");
+  const [onFocusEmail, setFocusEmail] = useState("null");
   const [onFocusPassword, setPassword] = useState("null");
   const [isShowPassword, setShowPassword] = useState(true);
 
@@ -26,7 +26,7 @@ const LoginScreen = ({ toggleUser }) => {
 
   const onSubmit = () => {
     Alert.alert(`${email}-${password}`);
-    changeEmail("");
+    setEmail("");
     changePassword("");
     setEmail("");
   };
@@ -45,10 +45,10 @@ const LoginScreen = ({ toggleUser }) => {
 
           <TextInput
             style={[styles.input, onFocusEmail === "email" && styles.isFocus]}
-            onFocus={() => setEmail("email")}
-            onBlur={() => setEmail(null)}
+            onFocus={() => setFocusEmail("email")}
+            onBlur={() => setFocusEmail(null)}
             placeholder="Адреса електронної пошти"
-            onChangeText={changeEmail}
+            onChangeText={setEmail}
             value={email}
           />
 
