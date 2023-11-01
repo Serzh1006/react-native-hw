@@ -29,6 +29,9 @@ const RegisterScreen = ({ toggleUser }) => {
 
   const onSubmit = () => {
     Alert.alert(`${login}-${email}-${password}`);
+    changeLogin("");
+    changeEmail("");
+    changePassword("");
   };
 
   return (

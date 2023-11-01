@@ -26,6 +26,9 @@ const LoginScreen = ({ toggleUser }) => {
 
   const onSubmit = () => {
     Alert.alert(`${email}-${password}`);
+    changeEmail("");
+    changePassword("");
+    setEmail("");
   };
 
   return (
